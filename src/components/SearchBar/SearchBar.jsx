@@ -4,42 +4,44 @@ import  data from "../../../Data.json";
 import "./SearchBar.css"
 import CardList from "../CardList/CardList";
 
-const items = [
-  "Alice",
-  "Bob",
-  "Charlie",
-  "David",
-  "Eve",
-  "Frank",
-  "Grace",
-  "Hannah",
-];
-
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [bookDetail, setBookDetail] = useState([]);
 
+
+  const countOccurrence = (sentence, word) => {
+    const count = sentence.match(new RegExp(`\\b${word}\\b`, 'gi'));
+    return count?.length > 0 ? count.length : 0;
+  }
   const handleSearch = (e) => {
     const value = e.target.value;
-    setSearchInput(value);
+    if(value !== ''){
+      setSearchInput(value);
 
-    // Filter the list based on input
-    const filtered = data.summaries.filter((item) =>
-      item.summary.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setFilteredItems(filtered);
+      const filteredList = data.summaries.reduce((acc, item) => {
+        const totalOccurrence = countOccurrence(item.summary.toLocaleLowerCase(), value.toLocaleLowerCase());
+        if(totalOccurrence > 0){
+          acc.push({...item, totalOccurrence})
+        }
+        return acc;
+      },[]).sort((a,b) => b.totalOccurrence - a.totalOccurrence);
+      setFilteredItems(filteredList);
+    }else{
+      resetValue();
+    }
   };
 
   const handleOnSelect = (item) => {
-      let selectedData = {}  
-      const author = data.authors.filter((author) => author.book_id === item.id);
-      const title =  item.titleName;
-      const summary = data.summaries.filter((summary) => summary.id === item.id);
-
-      selectedData = {author: author[0].author, title, summary: summary[0].summary}
-      setBookDetail([...bookDetail, selectedData]);
+      let itemExists = bookDetail.some(book => book.id === item.id);
+      if(!itemExists){
+        let selectedData = {};
+        const author = data.authors.filter((author) => author.book_id === item.id);
+        const title =  item.titleName;
+        const summary = data.summaries.filter((summary) => summary.id === item.id);
+        selectedData = {id: item.id, author: author[0].author, title, summary: summary[0].summary}
+        setBookDetail([...bookDetail, selectedData]);
+      }
       resetValue();
   }
 

@@ -1,6 +1,9 @@
 .card-container{
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 25px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
 }
