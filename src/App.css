@@ -1,0 +1,9 @@
+*{
+    margin:0
+}
+.app-layout{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+}
