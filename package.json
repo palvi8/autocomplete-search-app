@@ -1,0 +1,21 @@
+{
+  "name": "auto-complete-search-app",
+  "version": "1.0.0",
+  "description": "Develop an autocomplete search feature that predicts and suggests possible search queries based on user input, enhancing user experience and efficiency during search operations. The system should swiftly analyze and retrieve relevant search suggestions in real-time, optimizing user interactions and facilitating seamless navigation across the platform or application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  }
+}
