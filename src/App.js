@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import List from "./components/List/List";
-import SearchBar from "./components/SearchBar/SearchBar";
 import './App.css';
+import Main from "./components/Main/Main";
 
 const App = () => {
   return (
     <div className="app-layout">
-        <SearchBar/>
+        <Main/>
     </div>
   );
 };
